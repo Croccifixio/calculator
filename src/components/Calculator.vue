@@ -13,10 +13,14 @@ div
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { pipe } from 'ramda'
+import { times } from 'ramda'
 import Keypad from '@/components/Keypad.vue'
 import { evaluate, validate } from '@/utils'
 import { Calculation } from '@/types'
+
+const fetchRandomNumber = async () => fetch('https://www.random.org/integers/?num=1&min=1&max=100&col=1&base=10&format=plain&rnd=new')
+    .then(response => response.json())
+    .then(data => data)
 
 @Component({
   components: {
@@ -30,12 +34,36 @@ export default class Calculator extends Vue {
     isExpressionValid: false,
   }
 
-  evaluateExpression() {
-    const expression = this.expression
-    this.calculation = pipe(
-      validate,
-      evaluate
-    )({ ...this.calculation, expression })
+  async evaluateExpression() {
+    let expression = this.expression
+    const validatedCalculation = validate({
+      ...this.calculation,
+      expression,
+    })
+
+
+    if (validatedCalculation.isExpressionValid) {
+      const splitExpression = validatedCalculation.expression.split('RAND')
+      const randomNumberCount = splitExpression.length - 1
+      const randomNumbers: string[] = await Promise.all(
+        times(fetchRandomNumber)(randomNumberCount)
+      )
+
+      expression = splitExpression.reduce(
+        (acc, v, index) =>
+          acc.includes('RAND')
+            ? acc.replace('RAND', randomNumbers[index])
+            : acc,
+        expression
+      )
+    }
+
+    const evaluatedCalculation = evaluate({
+      ...validatedCalculation,
+      expression,
+    })
+
+    this.calculation = evaluatedCalculation
   }
 
   get expression() {

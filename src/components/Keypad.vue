@@ -20,7 +20,8 @@
   button.one(@click="appendExpression('3')") 3
   button.one(@click="eraseExpression") del
   button.tall(@click="evaluateExpression") =
-  button.wide(@click="appendExpression('0')") 0
+  button.one(@click="appendExpression('RAND')") RAND
+  button.one(@click="appendExpression('0')") 0
   button.one(@click="appendExpression('.')") .
   button.one(@click="clearExpression('C')") C
 </template>
@@ -81,8 +82,4 @@ button
   grid-row-start 4
   grid-row-end 6
   width var(--button-size)
-
-.wide
-  grid-column-start 1
-  grid-column-end 3
 </style>
