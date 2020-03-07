@@ -17,7 +17,7 @@ import { evaluate, validate } from '@/utils'
 import { Calculation } from '@/types'
 
 @Component
-export default class HelloWorld extends Vue {
+export default class Calculator extends Vue {
   calculation: Calculation = {
     evaluation: '',
     expression: '',
