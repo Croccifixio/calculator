@@ -1,8 +1,8 @@
 <template lang="pug">
 div
   h1 Calculator
-  input(v-model="calculation.expression")
-  div {{ calculation.evaluation }}
+  input(v-model="calculation.expression",@keyup="evaluateExpression")
+  div {{ prettyValue }}
 </template>
 
 <script lang="ts">
@@ -15,12 +15,20 @@ import { Calculation } from '@/types'
 export default class HelloWorld extends Vue {
   calculation: Calculation = {
     evaluation: '',
-    expression: 'sin(30) + cos(20)',
-    isExpressionValid: true,
+    expression: '',
+    isExpressionValid: false,
   }
 
-  created() {
+  evaluateExpression() {
     this.calculation = pipe(validate, evaluate)(this.calculation)
+  }
+
+  get prettyValue() {
+    const { isExpressionValid, expression, evaluation } = this.calculation
+
+    if (expression === '') return ''
+    if (!isExpressionValid) return 'ERR'
+    return evaluation
   }
 }
 </script>

@@ -15,12 +15,14 @@ const trimWhiteSpace = (exp: string): string => exp.replace(/\s/g, '')
 
 export const evaluate = (calc: Calculation): Calculation => ({
   ...calc,
-  evaluation: pipe(
-    trimWhiteSpace,
-    handleTrigFunctions,
-    eval,
-    round(10 ** -10),
-  )(calc.expression)
+  evaluation: calc.isExpressionValid
+    ? pipe(
+      trimWhiteSpace,
+      handleTrigFunctions,
+      eval,
+      round(10 ** -10),
+    )(calc.expression)
+    : ''
 })
 
 export const validate = (calc: Calculation): Calculation => ({
