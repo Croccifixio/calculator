@@ -1,4 +1,4 @@
-const NUMBER_RE = '\\d+|RAND'
+const NUMBER_RE = '(\\d+|RAND)'
 const OPERATOR_RE = '[\\+\\-\\*\\/]'
 const PLUS_MINUS_RE = '[\\+\\-]?'
 const TRIG_FN_CLOSE_RE = '\\)'

@@ -41,7 +41,6 @@ export default class Calculator extends Vue {
       expression,
     })
 
-
     if (validatedCalculation.isExpressionValid) {
       const splitExpression = validatedCalculation.expression.split('RAND')
       const randomNumberCount = splitExpression.length - 1
