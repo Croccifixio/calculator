@@ -62,10 +62,12 @@ export default class Calculator extends Vue {
 .wrapper
   align-items center
   display flex
+  font-size 20px
 
 .expression
-  border 1px solid #000
+  border 2px solid #000
   flex-basis calc(100% - 20ch)
+  font-size 20px
   padding 0.3em
   text-align right
 

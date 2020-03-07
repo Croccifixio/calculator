@@ -51,7 +51,7 @@ export default class Keypad extends Vue {
 
 <style lang="stylus" scoped>
 .keypad
-  --button-size 8ch
+  --button-size 6ch
   background-color #000
   border 2px solid #000
   display inline-grid
@@ -65,7 +65,9 @@ button
   background-color #fff
   border 0
   box-shadow none
+  cursor pointer
   display flex
+  font-size 16px
   justify-content center
   outline none
   padding 0

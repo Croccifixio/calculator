@@ -30,18 +30,19 @@ h2
   color #fff
   line-height 1
   margin 0
+  padding-bottom 0.15em
   text-transform uppercase
-  text-align right
 
 ul
   padding 0 1em 1em
 
 li
   display flex
+  font-size 18px
   justify-content flex-end
 
 .expression
-  flex-basis calc(100% - 20ch)
+  flex-basis calc(100% - 1.5ch)
   text-align right
 
 .equals
@@ -50,7 +51,7 @@ li
   padding 0 1ch
 
 .evaluation
-  flex-basis 17ch
+  flex-basis calc(100% - 1.5ch)
   font-weight 700
   text-align left
 </style>

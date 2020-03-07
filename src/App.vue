@@ -19,8 +19,22 @@ export default class App extends Vue {}
 </script>
 
 <style lang="stylus">
+@font-face
+  font-family Cartograph
+  font-weight 400
+  src url('assets/CartographCF-DemiBold.woff2') format('woff2')
+
+@font-face
+  font-family Cartograph
+  font-weight 700
+  src url('assets/CartographCF-HeavyItalic.woff2') format('woff2')
+
 #app
-  font-family Avenir, Helvetica, Arial, sans-serif
+button
+input
+  font-family Cartograph, Avenir, Helvetica, Arial, sans-serif
+
+#app
   text-align center
   color #2c3e50
   margin 60px auto 0
