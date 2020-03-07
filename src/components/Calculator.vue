@@ -1,7 +1,10 @@
 <template lang="pug">
 div
   h1 Calculator
-  input(v-model="calculation.expression",@keyup="evaluateExpression")
+  input(
+    v-model="expression"
+    @keyup="evaluateExpression"
+  )
   div {{ prettyValue }}
 </template>
 
@@ -18,9 +21,13 @@ export default class HelloWorld extends Vue {
     expression: '',
     isExpressionValid: false,
   }
+  expression = ''
 
   evaluateExpression() {
-    this.calculation = pipe(validate, evaluate)(this.calculation)
+    this.calculation = pipe(
+      validate,
+      evaluate
+    )({ ...this.calculation, expression: this.expression })
   }
 
   get prettyValue() {
