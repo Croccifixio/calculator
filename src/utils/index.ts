@@ -25,5 +25,5 @@ export const evaluate = (calc: Calculation): Calculation => ({
 
 export const validate = (calc: Calculation): Calculation => ({
   ...calc,
-  isExpressionValid: Validator.isValid(calc.expression),
+  isExpressionValid: pipe(trimWhiteSpace, Validator.isValid)(calc.expression),
 })
