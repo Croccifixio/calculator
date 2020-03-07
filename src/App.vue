@@ -2,20 +2,17 @@
 #app
   History
   Calculator
-  Keypad
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Calculator from './components/Calculator.vue'
 import History from './components/History.vue'
-import Keypad from './components/Keypad.vue'
 
 @Component({
   components: {
     Calculator,
     History,
-    Keypad,
   },
 })
 export default class App extends Vue {}

@@ -1,36 +1,52 @@
 <template lang="pug">
 .keypad
-  button.one sin
-  button.one cos
-  button.one tan
-  button.one (
-  button.one )
-  button.one 7
-  button.one 8
-  button.one 9
-  button.one *
-  button.one /
-  button.one 4
-  button.one 5
-  button.one 6
-  button.one +
-  button.one -
-  button.one 1
-  button.one 2
-  button.one 3
-  button.one del
-  button.two =
-  button.one AC
-  button.one C
-  button.one 0
-  button.one .
+  button.one(@click="appendExpression('sin(')") sin
+  button.one(@click="appendExpression('cos(')") cos
+  button.one(@click="appendExpression('tan(')") tan
+  button.one(@click="appendExpression('(')") (
+  button.one(@click="appendExpression(')')") )
+  button.one(@click="appendExpression('7')") 7
+  button.one(@click="appendExpression('8')") 8
+  button.one(@click="appendExpression('9')") 9
+  button.one(@click="appendExpression('*')") *
+  button.one(@click="appendExpression('/')") /
+  button.one(@click="appendExpression('4')") 4
+  button.one(@click="appendExpression('5')") 5
+  button.one(@click="appendExpression('6')") 6
+  button.one(@click="appendExpression('+')") +
+  button.one(@click="appendExpression('-')") -
+  button.one(@click="appendExpression('1')") 1
+  button.one(@click="appendExpression('2')") 2
+  button.one(@click="appendExpression('3')") 3
+  button.one(@click="eraseExpression") del
+  button.tall(@click="evaluateExpression") =
+  button.wide(@click="appendExpression('0')") 0
+  button.one(@click="appendExpression('.')") .
+  button.one(@click="clearExpression('C')") C
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Emit, Vue } from 'vue-property-decorator'
 
 @Component
-export default class Keypad extends Vue {}
+export default class Keypad extends Vue {
+  appendExpression(exp: string) {
+    this.$store.commit('appendExpression', exp)
+  }
+
+  clearExpression() {
+    this.$store.commit('clearExpression')
+  }
+
+  eraseExpression() {
+    this.$store.commit('eraseExpression')
+  }
+
+  @Emit('evaluateExpression')
+  evaluateExpression() {
+    return null
+  }
+}
 </script>
 
 <style lang="stylus" scoped>
@@ -42,6 +58,7 @@ export default class Keypad extends Vue {}
   grid-gap 2px
   grid-template-columns repeat(5, 1fr)
   grid-template-rows repeat(5, 1fr)
+  margin-top 20px
 
 button
   align-items center
@@ -57,9 +74,13 @@ button
   height var(--button-size)
   width var(--button-size)
 
-.two
+.tall
   grid-column-start 5
   grid-row-start 4
   grid-row-end 6
   width var(--button-size)
+
+.wide
+  grid-column-start 1
+  grid-column-end 3
 </style>

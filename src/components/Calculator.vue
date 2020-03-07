@@ -8,28 +8,42 @@ div
     )
     .equals =
     .evaluation {{ prettyValue }}
+  Keypad(@evaluateExpression="evaluateExpression")
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { pipe } from 'ramda'
+import Keypad from '@/components/Keypad.vue'
 import { evaluate, validate } from '@/utils'
 import { Calculation } from '@/types'
 
-@Component
+@Component({
+  components: {
+    Keypad,
+  },
+})
 export default class Calculator extends Vue {
   calculation: Calculation = {
     evaluation: '',
     expression: '',
     isExpressionValid: false,
   }
-  expression = ''
 
   evaluateExpression() {
+    const expression = this.expression
     this.calculation = pipe(
       validate,
       evaluate
-    )({ ...this.calculation, expression: this.expression })
+    )({ ...this.calculation, expression })
+  }
+
+  get expression() {
+    return this.$store.state.expression
+  }
+
+  set expression(exp: string) {
+    this.$store.commit('setExpression', exp)
   }
 
   get prettyValue() {
@@ -38,7 +52,7 @@ export default class Calculator extends Vue {
     if (expression === '') return ''
     if (!isExpressionValid) return 'ERR'
 
-    this.$store.commit('append', this.calculation)
+    this.$store.commit('appendHistory', this.calculation)
     return evaluation
   }
 }

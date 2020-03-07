@@ -5,5 +5,6 @@ export interface Calculation {
 }
 
 export interface CalculatorState {
+  expression: string
   history: Calculation[]
 }
