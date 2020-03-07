@@ -3,3 +3,7 @@ export interface Calculation {
   expression: string
   isExpressionValid: boolean
 }
+
+export interface CalculatorState {
+  history: Calculation[]
+}
