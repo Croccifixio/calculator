@@ -14,7 +14,6 @@ import { Component, Vue } from 'vue-property-decorator'
 @Component
 export default class History extends Vue {
   get history() {
-    console.log(`this.$store.state.history =>`, this.$store.state.history)
     return this.$store.state.history
   }
 }
